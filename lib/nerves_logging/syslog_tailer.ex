@@ -1,13 +1,13 @@
 defmodule NervesLogging.SyslogTailer do
-  use GenServer
-  require Logger
-
   @moduledoc """
   This GenServer routes syslog messages from C-based applications and libraries through
   the Elixir Logger for collection.
   """
 
+  use GenServer
+
   alias NervesLogging.SyslogParser
+  require Logger
 
   @syslog_path "/dev/log"
 

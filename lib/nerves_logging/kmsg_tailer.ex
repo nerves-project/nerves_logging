@@ -7,8 +7,8 @@ defmodule NervesLogging.KmsgTailer do
 
   use GenServer
 
-  require Logger
   alias NervesLogging.{KmsgParser, SyslogParser}
+  require Logger
 
   @doc """
   Start the kmsg monitoring GenServer.
