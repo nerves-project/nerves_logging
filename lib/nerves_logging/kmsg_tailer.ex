@@ -35,7 +35,7 @@ defmodule NervesLogging.KmsgTailer do
   end
 
   defp open_port() do
-    executable = :code.priv_dir(:nerves_logging) ++ '/kmsg_tailer'
+    executable = Application.app_dir(:nerves_logging, ["priv", "kmsg_tailer"])
 
     Port.open({:spawn_executable, executable}, [
       {:line, 1024},
