@@ -4,7 +4,7 @@ defmodule NervesLogging.SyslogParser do
   """
 
   @type severity ::
-          :alert | :critical | :debug | :emergency | :error | :informational | :notice | :warning
+          :alert | :critical | :debug | :emergency | :error | :info | :notice | :warning
 
   @type facility ::
           :kernel
@@ -117,17 +117,6 @@ defmodule NervesLogging.SyslogParser do
   defp severity_name(3), do: :error
   defp severity_name(4), do: :warning
   defp severity_name(5), do: :notice
-  defp severity_name(6), do: :informational
+  defp severity_name(6), do: :info
   defp severity_name(7), do: :debug
-
-  @doc """
-  Convert severity to an Elixir logger level
-  """
-  @spec severity_to_logger(severity()) :: Logger.level()
-  def severity_to_logger(severity) when severity in [:emergency, :alert, :critical, :error],
-    do: :error
-
-  def severity_to_logger(severity) when severity == :warning, do: :warn
-  def severity_to_logger(severity) when severity in [:notice, :informational], do: :info
-  def severity_to_logger(severity) when severity == :debug, do: :debug
 end

@@ -8,7 +8,7 @@ defmodule NervesLogging.MixProject do
     [
       app: :nerves_logging,
       version: @version,
-      elixir: "~> 1.9",
+      elixir: "~> 1.11",
       start_permanent: Mix.env() == :prod,
       build_embedded: true,
       compilers: [:elixir_make | Mix.compilers()],

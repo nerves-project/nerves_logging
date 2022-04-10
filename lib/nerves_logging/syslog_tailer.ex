@@ -37,14 +37,11 @@ defmodule NervesLogging.SyslogTailer do
   def handle_info({:udp, log_port, _, 0, raw_entry}, log_port) do
     case SyslogParser.parse(raw_entry) do
       {:ok, %{facility: facility, severity: severity, message: message}} ->
-        level = SyslogParser.severity_to_logger(severity)
-
         Logger.bare_log(
-          level,
+          severity,
           message,
           module: __MODULE__,
-          facility: facility,
-          severity: severity
+          facility: facility
         )
 
       _ ->

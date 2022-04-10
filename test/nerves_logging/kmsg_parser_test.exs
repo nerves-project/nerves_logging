@@ -36,7 +36,7 @@ defmodule NervesLogging.KmsgParserTest do
               message:
                 "oom_reaper: reaped process 14910 (code), now anon-rss:0kB, file-rss:0kB, shmem-rss:0kB",
               facility: :kernel,
-              severity: :informational,
+              severity: :info,
               sequence: 7004,
               timestamp: 192_203_028_735,
               flags: []

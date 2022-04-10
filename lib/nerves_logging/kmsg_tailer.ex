@@ -7,7 +7,7 @@ defmodule NervesLogging.KmsgTailer do
 
   use GenServer
 
-  alias NervesLogging.{KmsgParser, SyslogParser}
+  alias NervesLogging.KmsgParser
   require Logger
 
   @doc """
@@ -19,7 +19,19 @@ defmodule NervesLogging.KmsgTailer do
   end
 
   @impl GenServer
-  def init(_args), do: {:ok, %{port: open_port(), buffer: ""}}
+  def init(_args) do
+    executable = Application.app_dir(:nerves_logging, ["priv", "kmsg_tailer"])
+
+    port =
+      Port.open({:spawn_executable, executable}, [
+        {:line, 1024},
+        :use_stdio,
+        :binary,
+        :exit_status
+      ])
+
+    {:ok, %{port: port, buffer: ""}}
+  end
 
   @impl GenServer
   def handle_info({port, {:data, {:noeol, fragment}}}, %{port: port, buffer: buffer} = state) do
@@ -30,32 +42,18 @@ defmodule NervesLogging.KmsgTailer do
         {port, {:data, {:eol, fragment}}},
         %{port: port, buffer: buffer} = state
       ) do
-    _ = handle_message(buffer <> fragment)
+    handle_message(buffer <> fragment)
     {:noreply, %{state | buffer: ""}}
-  end
-
-  defp open_port() do
-    executable = Application.app_dir(:nerves_logging, ["priv", "kmsg_tailer"])
-
-    Port.open({:spawn_executable, executable}, [
-      {:line, 1024},
-      :use_stdio,
-      :binary,
-      :exit_status
-    ])
   end
 
   defp handle_message(raw_entry) do
     case KmsgParser.parse(raw_entry) do
       {:ok, %{facility: facility, severity: severity, message: message}} ->
-        level = SyslogParser.severity_to_logger(severity)
-
         Logger.bare_log(
-          level,
+          severity,
           message,
           module: __MODULE__,
-          facility: facility,
-          severity: severity
+          facility: facility
         )
 
       _ ->
