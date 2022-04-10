@@ -53,4 +53,6 @@ defmodule NervesLogging.SyslogTailer do
 
     {:noreply, log_port}
   end
+
+  def handle_info(_, state), do: {:noreply, state}
 end

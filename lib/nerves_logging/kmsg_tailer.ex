@@ -46,6 +46,8 @@ defmodule NervesLogging.KmsgTailer do
     {:noreply, %{state | buffer: ""}}
   end
 
+  def handle_info(_, state), do: {:noreply, state}
+
   defp handle_message(raw_entry) do
     case KmsgParser.parse(raw_entry) do
       {:ok, %{facility: facility, severity: severity, message: message}} ->
