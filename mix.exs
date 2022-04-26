@@ -51,7 +51,7 @@ defmodule NervesLogging.MixProject do
   end
 
   defp description do
-    "Small, general runtime utilities for Nerves devices"
+    "Route system log messages through the Elixir logger"
   end
 
   defp package do
