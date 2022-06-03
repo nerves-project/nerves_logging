@@ -24,13 +24,17 @@ defmodule NervesLogging.SyslogTailer do
     # Blindly try to remove an old file just in case it exists from a previous run
     _ = File.rm(@syslog_path)
 
-    {:ok, log_port} =
-      :gen_udp.open(0, [:local, :binary, {:active, true}, {:ip, {:local, @syslog_path}}])
+    case :gen_udp.open(0, [:local, :binary, {:active, true}, {:ip, {:local, @syslog_path}}]) do
+      {:ok, log_port} ->
+        # All processes should be able to log messages
+        File.chmod!(@syslog_path, 0o666)
 
-    # All processes should be able to log messages
-    File.chmod!(@syslog_path, 0o666)
+        {:ok, log_port}
 
-    {:ok, log_port}
+      {:error, reason} ->
+        Logger.error("nerves_logger: not starting syslog server due to #{inspect(reason)}")
+        :ignore
+    end
   end
 
   @impl GenServer
