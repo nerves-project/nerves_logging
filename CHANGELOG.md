@@ -1,5 +1,12 @@
 # Changelog
 
+## v0.1.1 - 2022-06-03
+
+* Changes
+  * Don't crash when lacking permissions to read logs. Restarting doesn't fix
+    the permission issue so this ends up being terminal. The error will be
+    logged.
+
 ## v0.1.0 - 2022-04-26
 
 Extract system logging from `nerves_runtime`.
