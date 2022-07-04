@@ -20,22 +20,17 @@ defmodule NervesLogging.KmsgTailer do
 
   @impl GenServer
   def init(_args) do
-    if File.exists?("/dev/kmsg") do
-      executable = Application.app_dir(:nerves_logging, ["priv", "kmsg_tailer"])
+    executable = Application.app_dir(:nerves_logging, ["priv", "kmsg_tailer"])
 
-      port =
-        Port.open({:spawn_executable, executable}, [
-          {:line, 1024},
-          :use_stdio,
-          :binary,
-          :exit_status
-        ])
+    port =
+      Port.open({:spawn_executable, executable}, [
+        {:line, 1024},
+        :use_stdio,
+        :binary,
+        :exit_status
+      ])
 
-      {:ok, %{port: port, buffer: ""}}
-    else
-      Logger.error("nerves_logger: not starting kmsg server since /dev/kmsg doesn't exist")
-      :ignore
-    end
+    {:ok, %{port: port, buffer: ""}}
   end
 
   @impl GenServer
