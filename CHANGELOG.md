@@ -1,5 +1,14 @@
 # Changelog
 
+## v0.2.0 - 2022-07-04
+
+* Changes
+  * No longer automatically start log tailers. Users must add
+    `NervesLogging.KmsgTailer` and `NervesLogging.SyslogTailer` to their
+    supervision trees. This simplifies the logic for whether to start the
+    loggers or not. Very few users will need to do anything. It will be handled
+    by `Nerves.Runtime`.
+
 ## v0.1.1 - 2022-06-03
 
 * Changes
