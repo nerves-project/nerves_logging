@@ -10,7 +10,6 @@ defmodule NervesLogging.MixProject do
       version: @version,
       elixir: "~> 1.11",
       start_permanent: Mix.env() == :prod,
-      build_embedded: true,
       compilers: [:elixir_make | Mix.compilers()],
       make_targets: ["all"],
       make_clean: ["mix_clean"],
