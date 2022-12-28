@@ -57,7 +57,7 @@ defmodule NervesLogging.MixProject do
       files: [
         "CHANGELOG.md",
         "lib",
-        "LICENSE",
+        "LICENSES/*",
         "mix.exs",
         "README.md",
         "c_src/*.[ch]",

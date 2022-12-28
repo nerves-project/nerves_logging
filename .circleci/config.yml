@@ -19,6 +19,14 @@ install_system_deps: &install_system_deps
         apk add build-base
 
 jobs:
+  check_license:
+    docker:
+      - image: fsfe/reuse:latest
+    <<: *defaults
+    steps:
+      - checkout
+      - run: reuse lint
+
   build_elixir_1_14_otp_25:
     docker:
       - image: hexpm/elixir:1.14.2-erlang-25.2-alpine-3.17.0

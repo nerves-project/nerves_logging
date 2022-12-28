@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2017 Nerves Project Developers
+#
+# SPDX-License-Identifier: Apache-2.0
+
 defmodule NervesLogging.SyslogTailer do
   @moduledoc """
   This GenServer routes syslog messages from C-based applications and libraries through
