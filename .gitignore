@@ -24,6 +24,3 @@ nerves_logging-*.tar
 
 # Temporary files, for example, from tests.
 /tmp/
-
-# Ignore C build products
-src/*.o
