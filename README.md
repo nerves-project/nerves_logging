@@ -2,6 +2,7 @@
 
 [![CircleCI](https://circleci.com/gh/nerves-project/nerves_logging.svg?style=svg)](https://circleci.com/gh/nerves-project/nerves_logging)
 [![Hex version](https://img.shields.io/hexpm/v/nerves_logging.svg "Hex version")](https://hex.pm/packages/nerves_logging)
+[![REUSE status](https://api.reuse.software/badge/github.com/nerves-project/nerves_logging)](https://api.reuse.software/info/github.com/nerves-project/nerves_logging)
 
 NervesLogging forwards log messages from the Linux kernel and syslog to the
 Elixir logger. It's used with Nerves so that all log messages pass through one
