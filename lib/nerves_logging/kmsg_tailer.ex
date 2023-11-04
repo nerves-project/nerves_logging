@@ -58,6 +58,7 @@ defmodule NervesLogging.KmsgTailer do
         Logger.bare_log(
           severity,
           message,
+          application: :"$kmsg",
           module: __MODULE__,
           facility: facility
         )

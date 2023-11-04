@@ -48,6 +48,7 @@ defmodule NervesLogging.SyslogTailer do
         Logger.bare_log(
           severity,
           message,
+          application: :"$syslog",
           module: __MODULE__,
           facility: facility
         )
