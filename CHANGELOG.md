@@ -1,5 +1,12 @@
 # Changelog
 
+## v0.2.2 - 2023-11-05
+
+* Changes
+  * Label log messages coming from syslog and the kernel ringbuffer as `$syslog`
+    and `$kmsg`. These are in the "application" field. This helps when log
+    messages by application since these used to be `nil`.
+
 ## v0.2.1 - 2023-06-30
 
 * Changes
