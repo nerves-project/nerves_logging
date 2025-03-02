@@ -1,4 +1,5 @@
-# SPDX-FileCopyrightText: 2017 Nerves Project Developers
+# SPDX-FileCopyrightText: 2018 Greg Mefford
+# SPDX-FileCopyrightText: 2022 Frank Hunleth
 #
 # SPDX-License-Identifier: Apache-2.0
 

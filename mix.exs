@@ -56,15 +56,20 @@ defmodule NervesLogging.MixProject do
     [
       files: [
         "CHANGELOG.md",
+        "c_src/*.[ch]",
         "lib",
         "LICENSES/*",
+        "Makefile",
         "mix.exs",
-        "README.md",
-        "c_src/*.[ch]",
-        "Makefile"
+        "NOTICE",
+        "README.md"
       ],
       licenses: ["Apache-2.0"],
-      links: %{"Github" => @source_url}
+      links: %{
+        "GitHub" => @source_url,
+        "REUSE Compliance" =>
+          "https://api.reuse.software/info/github.com/nerves-project/nerves_logging"
+      }
     ]
   end
 
