@@ -91,6 +91,22 @@ defmodule NervesLogging.SyslogParser do
     {:error, :parse_error}
   end
 
+  @doc """
+  Validate the given log level
+  """
+  @spec validate_log_level(any()) :: atom()
+  def validate_log_level(level) when is_atom(level) do
+    if level in Logger.levels() do
+      level
+    else
+      :error
+    end
+  end
+
+  def validate_log_level(_) do
+    :error
+  end
+
   defp facility_name(0), do: :kernel
   defp facility_name(1), do: :user_level
   defp facility_name(2), do: :mail

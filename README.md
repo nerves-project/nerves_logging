@@ -22,16 +22,34 @@ reducing what's logged if the system logs become too noisy. For example, try
 
 ## Using
 
-There's no configuration. Add the following to a supervision tree to capture the
-logs:
+NervesLogging can be started with or without configuration. The only available options currently are the `log_level` for `NervesLogging.KmsgTailer` and for `log_level` for `NervesLogging.SyslogTailer`. Both are optional
+
+The options for `log_level` are one of: [:emergency, :alert, :critical, :error, :warning, :notice, :informational, :debug]. Default is `:error`.
+
+Configure with:
+```elixir
+config :nerves_logging, :syslog,
+  log_level: :error
+
+config :nerves_logging, :kmsg,
+  log_level: :error
+```
+
+Add one of the following to a supervision tree to capture the
+logs (note, the configuration options above will NOT be applied when adding to a custom supervison tree like in the code snippets below):
 
 ```elixir
     [NervesLogging.KmsgTailer, NervesLogging.SyslogTailer]
 ```
 
+```elixir
+    # add with options
+    [{NervesLogging.KmsgTailer, [log_level: :error]}, {NervesLogging.SyslogTailer, [log_level: :error]}]
+```
+
 If you're using Nerves, you don't need to do this.
 [Nerves.Runtime](https://github.com/nerves-project/nerves_runtime) adds these to
-its supervision tree.
+its supervision tree. The configuration options can be applied using this method.
 
 ## License
 

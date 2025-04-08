@@ -16,15 +16,39 @@ defmodule NervesLogging.KmsgTailer do
   require Logger
 
   @doc """
+  Return current `log_level`
+  """
+  @spec get_log_level() :: atom()
+  def get_log_level() do
+    GenServer.call(__MODULE__, :get_log_level)
+  end
+
+  @doc """
+  Set current `log_level` to one of `Logger.levels()`
+  """
+  @spec set_log_level(any()) :: :ok | {:error, :bad_level}
+  def set_log_level(level) when is_atom(level) do
+    if level in Logger.levels() do
+      GenServer.cast(__MODULE__, {:set_log_level, level})
+    else
+      {:error, :bad_level}
+    end
+  end
+
+  def set_log_level(_) do
+    {:error, :bad_level}
+  end
+
+  @doc """
   Start the kmsg monitoring GenServer.
   """
   @spec start_link(any()) :: GenServer.on_start()
-  def start_link(_args) do
-    GenServer.start_link(__MODULE__, [], name: __MODULE__)
+  def start_link(opts) do
+    GenServer.start_link(__MODULE__, opts, name: __MODULE__)
   end
 
   @impl GenServer
-  def init(_args) do
+  def init(opts) do
     executable = Application.app_dir(:nerves_logging, ["priv", "kmsg_tailer"])
 
     port =
@@ -35,7 +59,9 @@ defmodule NervesLogging.KmsgTailer do
         :exit_status
       ])
 
-    {:ok, %{port: port, buffer: ""}}
+    log_level = Keyword.get(opts, :log_level) |> NervesLogging.SyslogParser.validate_log_level()
+
+    {:ok, %{port: port, buffer: "", log_level: log_level}}
   end
 
   @impl GenServer
@@ -45,24 +71,36 @@ defmodule NervesLogging.KmsgTailer do
 
   def handle_info(
         {port, {:data, {:eol, fragment}}},
-        %{port: port, buffer: buffer} = state
+        %{port: port, buffer: buffer, log_level: log_level} = state
       ) do
-    handle_message(buffer <> fragment)
+    handle_message(buffer <> fragment, log_level)
     {:noreply, %{state | buffer: ""}}
   end
 
   def handle_info(_, state), do: {:noreply, state}
 
-  defp handle_message(raw_entry) do
+  @impl GenServer
+  def handle_call(:get_log_level, _from, state = %{log_level: log_level}) do
+    {:reply, log_level, state}
+  end
+
+  @impl GenServer
+  def handle_cast({:set_log_level, level}, state) do
+    {:noreply, Map.put(state, :log_level, level)}
+  end
+
+  defp handle_message(raw_entry, log_level) do
     case KmsgParser.parse(raw_entry) do
       {:ok, %{facility: facility, severity: severity, message: message}} ->
-        Logger.bare_log(
-          severity,
-          message,
-          application: :"$kmsg",
-          module: __MODULE__,
-          facility: facility
-        )
+        if Logger.compare_levels(severity, log_level) in [:gt, :eq] do
+          Logger.bare_log(
+            severity,
+            message,
+            application: :"$kmsg",
+            module: __MODULE__,
+            facility: facility
+          )
+        end
 
       _ ->
         # We don't handle continuations and multi-line kmsg logs.
