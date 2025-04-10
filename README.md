@@ -14,7 +14,10 @@ Logger level. This means that if the kernel's level is "Error", the Elixir level
 will be `:error`. Since Elixir 1.11 and later have the same log levels as
 Syslog, this mapping is 1:1.
 
-The Syslog facility is passed via log metadata.
+NervesLogging adds the following metadata to the log messages:
+
+* `:facility` - the facility of the log message
+* `:application` - either `:$kmsg` or `:$syslog`
 
 See the [Elixir Logger documentation](https://hexdocs.pm/logger/Logger.html) for
 reducing what's logged if the system logs become too noisy. Some examples:
@@ -24,17 +27,17 @@ reducing what's logged if the system logs become too noisy. Some examples:
 Logger.put_application_level(:nerves_logging, :error)
 
 # Adjust logging for kernel logs
-Logger.put_module_level(NervesLogging.KmsgTailer, :info)
+Logger.put_module_level(NervesLogging.KmsgTailer, :error)
 
 # Adjust logging for syslog logs
-Logger.put_module_level(NervesLogging.SyslogTailer, :info)
+Logger.put_module_level(NervesLogging.SyslogTailer, :error)
 ```
 
 ## Using
 
 There's no configuration. If you're using Nerves, you should get this
-application by default since it's pulled in by
-[Nerves.Runtime](https://github.com/nerves-project/nerves_runtime).
+application by default since it's a dependency of
+[nerves_runtime](https://github.com/nerves-project/nerves_runtime).
 
 ## License
 

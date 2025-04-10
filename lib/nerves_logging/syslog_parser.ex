@@ -6,35 +6,6 @@
 defmodule NervesLogging.SyslogParser do
   @moduledoc false
 
-  @type severity ::
-          :alert | :critical | :debug | :emergency | :error | :info | :notice | :warning
-
-  @type facility ::
-          :kernel
-          | :user_level
-          | :mail
-          | :system
-          | :security_authorization
-          | :syslogd
-          | :line_printer
-          | :network_news
-          | :UUCP
-          | :clock
-          | :security_authorization
-          | :FTP
-          | :NTP
-          | :log_audit
-          | :log_alert
-          | :clock
-          | :local0
-          | :local1
-          | :local2
-          | :local3
-          | :local4
-          | :local5
-          | :local6
-          | :local7
-
   @doc """
   Parse out the syslog facility, severity, and message (including the timestamp
   and host) from a syslog-formatted string.
@@ -49,7 +20,12 @@ defmodule NervesLogging.SyslogParser do
   `message` is everything else.
   """
   @spec parse(String.t()) ::
-          {:ok, %{facility: facility(), severity: severity(), message: binary()}}
+          {:ok,
+           %{
+             facility: NervesLogging.facility(),
+             severity: NervesLogging.severity(),
+             message: binary()
+           }}
           | {:error, :parse_error}
   def parse(<<"<", pri, ">", message::binary>>) when pri >= ?0 and pri <= ?9 do
     do_parse(pri - ?0, message)
@@ -78,7 +54,8 @@ defmodule NervesLogging.SyslogParser do
   @doc """
   Decode a syslog priority to facility and severity
   """
-  @spec decode_priority(0..191) :: {:ok, facility(), severity()} | {:error, :parse_error}
+  @spec decode_priority(0..191) ::
+          {:ok, NervesLogging.facility(), NervesLogging.severity()} | {:error, :parse_error}
   def decode_priority(priority) when priority >= 0 and priority <= 191 do
     facility = div(priority, 8)
     severity = Integer.mod(priority, 8)

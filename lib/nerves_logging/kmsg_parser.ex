@@ -33,8 +33,8 @@ defmodule NervesLogging.KmsgParser do
   @spec parse(String.t()) ::
           {:ok,
            %{
-             facility: SyslogParser.facility(),
-             severity: SyslogParser.severity(),
+             facility: NervesLogging.facility(),
+             severity: NervesLogging.severity(),
              message: String.t(),
              timestamp: integer(),
              sequence: integer(),
