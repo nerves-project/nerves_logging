@@ -17,8 +17,18 @@ Syslog, this mapping is 1:1.
 The Syslog facility is passed via log metadata.
 
 See the [Elixir Logger documentation](https://hexdocs.pm/logger/Logger.html) for
-reducing what's logged if the system logs become too noisy. For example, try
-`Logger.put_application_level(:nerves_logging, :error)`.
+reducing what's logged if the system logs become too noisy. Some examples:
+
+```elixir
+# Reduce logging for both syslog and kernel logs
+Logger.put_application_level(:nerves_logging, :error)
+
+# Adjust logging for kernel logs
+Logger.put_module_level(NervesLogging.KmsgTailer, :info)
+
+# Adjust logging for syslog logs
+Logger.put_module_level(NervesLogging.SyslogTailer, :info)
+```
 
 ## Using
 
