@@ -1,5 +1,14 @@
 # Changelog
 
+## v0.2.3 - 2025-04-10
+
+* Changes
+  * Fix log message metadata and logging function call so log filtering works as
+    documented. This also improves the docs.
+  * General documentation and public API cleanup. This removes log parsing
+    modules from the public API since they're not intended to be called
+    directly.
+
 ## v0.2.2 - 2023-11-05
 
 * Changes
