@@ -32,16 +32,9 @@ Logger.put_module_level(NervesLogging.SyslogTailer, :info)
 
 ## Using
 
-There's no configuration. Add the following to a supervision tree to capture the
-logs:
-
-```elixir
-    [NervesLogging.KmsgTailer, NervesLogging.SyslogTailer]
-```
-
-If you're using Nerves, you don't need to do this.
-[Nerves.Runtime](https://github.com/nerves-project/nerves_runtime) adds these to
-its supervision tree.
+There's no configuration. If you're using Nerves, you should get this
+application by default since it's pulled in by
+[Nerves.Runtime](https://github.com/nerves-project/nerves_runtime).
 
 ## License
 

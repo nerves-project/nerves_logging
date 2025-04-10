@@ -4,9 +4,7 @@
 # SPDX-License-Identifier: Apache-2.0
 
 defmodule NervesLogging.KmsgParser do
-  @moduledoc """
-  Functions for parsing kmsg strings
-  """
+  @moduledoc false
 
   alias NervesLogging.SyslogParser
 

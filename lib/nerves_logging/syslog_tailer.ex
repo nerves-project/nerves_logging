@@ -4,10 +4,9 @@
 # SPDX-License-Identifier: Apache-2.0
 
 defmodule NervesLogging.SyslogTailer do
-  @moduledoc """
-  This GenServer routes syslog messages from C-based applications and libraries through
-  the Elixir Logger for collection.
-  """
+  @moduledoc false
+  # This GenServer routes syslog messages from C-based applications and libraries through
+  # the Elixir Logger for collection.
 
   use GenServer
 
