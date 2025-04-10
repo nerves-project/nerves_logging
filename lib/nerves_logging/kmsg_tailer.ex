@@ -4,11 +4,11 @@
 # SPDX-License-Identifier: Apache-2.0
 
 defmodule NervesLogging.KmsgTailer do
-  @moduledoc """
-  Collects operating system-level messages from `/proc/kmsg`,
-  forwarding them to `Logger` with an appropriate level to match the syslog
-  priority parsed out of the message.
-  """
+  @moduledoc false
+
+  # Collects operating system-level messages from `/proc/kmsg`,
+  # forwarding them to `Logger` with an appropriate level to match the syslog
+  # priority parsed out of the message.
 
   use GenServer
 

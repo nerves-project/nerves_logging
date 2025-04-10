@@ -4,9 +4,7 @@
 # SPDX-License-Identifier: Apache-2.0
 
 defmodule NervesLogging.SyslogParser do
-  @moduledoc """
-  Functions for parsing syslog strings
-  """
+  @moduledoc false
 
   @type severity ::
           :alert | :critical | :debug | :emergency | :error | :info | :notice | :warning
