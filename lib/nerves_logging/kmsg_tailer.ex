@@ -56,13 +56,7 @@ defmodule NervesLogging.KmsgTailer do
   defp handle_message(raw_entry) do
     case KmsgParser.parse(raw_entry) do
       {:ok, %{facility: facility, severity: severity, message: message}} ->
-        Logger.bare_log(
-          severity,
-          message,
-          application: :"$kmsg",
-          module: __MODULE__,
-          facility: facility
-        )
+        Logger.log(severity, message, application: :"$kmsg", facility: facility)
 
       _ ->
         # We don't handle continuations and multi-line kmsg logs.

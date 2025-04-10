@@ -46,13 +46,7 @@ defmodule NervesLogging.SyslogTailer do
   def handle_info({:udp, log_port, _, 0, raw_entry}, log_port) do
     case SyslogParser.parse(raw_entry) do
       {:ok, %{facility: facility, severity: severity, message: message}} ->
-        Logger.bare_log(
-          severity,
-          message,
-          application: :"$syslog",
-          module: __MODULE__,
-          facility: facility
-        )
+        Logger.log(severity, message, application: :"$syslog", facility: facility)
 
       _ ->
         # This is unlikely to ever happen, but if a message was somehow
