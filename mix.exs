@@ -18,8 +18,7 @@ defmodule NervesLogging.MixProject do
       package: package(),
       docs: docs(),
       dialyzer: dialyzer(),
-      deps: deps(),
-      preferred_cli_env: %{docs: :docs, "hex.build": :docs, "hex.publish": :docs}
+      deps: deps()
     ]
   end
 
@@ -27,6 +26,10 @@ defmodule NervesLogging.MixProject do
     [
       extra_applications: [:logger]
     ]
+  end
+
+  def cli do
+    [preferred_envs: %{docs: :docs, "hex.build": :docs, "hex.publish": :docs}]
   end
 
   defp deps do
