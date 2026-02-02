@@ -42,7 +42,14 @@ Logger.put_module_level(NervesLogging.SyslogTailer, :error)
 
 There's no configuration. If you're using Nerves, you should get this
 application by default since it's a dependency of
-[nerves_runtime](https://github.com/nerves-project/nerves_runtime).
+[`Nerves.Runtime`](https://github.com/nerves-project/nerves_runtime).
+
+Important: If you're not using `Nerves.Runtime`, you must add
+`[NervesLogging.KmsgTailer, NervesLogging.SyslogTailer]` to a supervision tree.
+This makes it possible to coordinate starting or restarting these Linux log
+monitors in coordination with your logger. The `KmsgTailer` logs historic kernel
+messages since boot when it starts up so you probably want a `:one_for_one`
+strategy to minimize its restarts due to other `GenServer` crashes.
 
 ## License
 

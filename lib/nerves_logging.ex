@@ -24,6 +24,9 @@ defmodule NervesLogging do
   # Adjust logging for syslog logs
   Logger.put_module_level(NervesLogging.SyslogTailer, :error)
   ```
+
+  This library is not an OTP application so its log tailers must be added to
+  a supervision tree. This is handled by `Nerves.Runtime` for Nerves devices.
   """
 
   @typedoc """
