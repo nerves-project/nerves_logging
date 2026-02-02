@@ -71,6 +71,7 @@ defmodule NervesLogging.MixProject do
       ],
       licenses: ["Apache-2.0"],
       links: %{
+        "Changelog" => "https://hexdocs.pm/nerves_logging/changelog.html",
         "GitHub" => @source_url,
         "REUSE Compliance" =>
           "https://api.reuse.software/info/github.com/nerves-project/nerves_logging"
