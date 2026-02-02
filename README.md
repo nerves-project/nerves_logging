@@ -1,3 +1,8 @@
+<!--
+  SPDX-FileCopyrightText: 2022 Frank Hunleth
+  SPDX-License-Identifier: CC-BY-4.0
+-->
+
 # NervesLogging
 
 [![Hex version](https://img.shields.io/hexpm/v/nerves_logging.svg "Hex version")](https://hex.pm/packages/nerves_logging)
