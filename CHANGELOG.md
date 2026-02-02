@@ -5,6 +5,11 @@
 
 # Changelog
 
+## v0.2.4 - 2026-02-02
+
+* Changes
+  * Removed unused application callbacks and clarified how the library is used
+
 ## v0.2.3 - 2025-04-10
 
 * Changes
