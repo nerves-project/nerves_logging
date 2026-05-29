@@ -12,7 +12,8 @@
         {Credo.Check.Readability.ParenthesesOnZeroArityDefs, parens: true},
         {Credo.Check.Readability.Specs, tags: []},
         {Credo.Check.Readability.StrictModuleLayout, tags: []},
-        {Credo.Check.Warning.MissedMetadataKeyInLoggerConfig, false}
+        {Credo.Check.Warning.MissedMetadataKeyInLoggerConfig, false},
+        {Credo.Check.Warning.UnsafeToAtom, []}
       ]
     }
   ]
