@@ -11,7 +11,7 @@ defmodule NervesLogging do
   * `:facility` - the facility of the log message
   * `:application` - either `:$kmsg` or `:$syslog`
 
-  See the [Elixir Logger documentation](https://hexdocs.pm/logger/Logger.html) for
+  See the [Elixir Logger documentation](https://logger.hexdocs.pm/Logger.html) for
   reducing what's logged if the system logs become too noisy. Some examples:
 
   ```elixir
