@@ -7,7 +7,8 @@
 
 [![Hex version](https://img.shields.io/hexpm/v/nerves_logging.svg "Hex version")](https://hex.pm/packages/nerves_logging)
 [![API docs](https://img.shields.io/hexpm/v/nerves_logging.svg?label=hexdocs "API docs")](https://nerves-logging.hexdocs.pm/NervesLogging.html)
-[![CircleCI](https://circleci.com/gh/nerves-project/nerves_logging.svg?style=svg)](https://circleci.com/gh/nerves-project/nerves_logging)
+[![Nerves compatibility](https://compatibility.nerves-project.org/badge/nerves_logging.svg)](https://compatibility.nerves-project.org/packages/nerves_logging)
+[![CircleCI](https://dl.circleci.com/status-badge/img/gh/nerves-project/nerves_logging/tree/main.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/nerves-project/nerves_logging/tree/main)
 [![REUSE status](https://api.reuse.software/badge/github.com/nerves-project/nerves_logging)](https://api.reuse.software/info/github.com/nerves-project/nerves_logging)
 
 NervesLogging forwards log messages from the Linux kernel and syslog to the
